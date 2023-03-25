@@ -1,0 +1,109 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant</title>
+</head>
+<body>
+    <div id="species-list"></div>
+
+    <script>
+        fetch('https://localhost:7000')
+            .then(response => response.json())
+            .then(species => {
+                const speciesList = document.getElementById('species-list');
+                species.forEach(element => {
+                    const p = document.createElement('p');
+                    p.innerText = element.common_name;
+                    speciesList.appendChild(p);
+                });
+            });
+    </script>
+
+    <h1>hello</h1>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE HTML>
+<html>
+
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body>
+  <form>
+    <input type="file" multiple />
+    <button type="button">OK</button>
+  </form>
+<script type="text/javascript">
+  
+document.querySelector('button').onclick = function sendIdentification() {
+    const files = [...document.querySelector('input[type=file]').files];
+    const promises = files.map((file) => {
+      return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const res = event.target.result;
+            console.log(res);
+            resolve(res);
+          }
+          reader.readAsDataURL(file)
+      })
+    })
+    
+    Promise.all(promises).then((base64files) => {
+      console.log(base64files)
+            
+      const data = {
+        api_key: "-- ask for one: https://web.plant.id/api-access-request/ --",
+        images: base64files,
+        // modifiers docs: https://github.com/flowerchecker/Plant-id-API/wiki/Modifiers
+        modifiers: ["crops_fast", "similar_images"],
+        language: "en",
+        // disease details docs: https://github.com/flowerchecker/Plant-id-API/wiki/Disease-details
+        disease_details: ["cause",
+                        "common_names",
+                        "classification",
+                        "description",
+                        "treatment",
+                        "url"],
+      };
+      
+      fetch('https://api.plant.id/v2/health_assessment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    })
+  
+};
+
+</script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="app.js"></script>
+</body>
+</html>
